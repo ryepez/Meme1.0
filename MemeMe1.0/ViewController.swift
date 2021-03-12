@@ -203,11 +203,15 @@ func generateMemedImage() -> UIImage {
     //presenting
     self.present(shareController, animated: true, completion: nil)
 //saving the meme and dimissing the activity view controller
-    shareController.completionWithItemsHandler = { [self]activityType, completed, returnedItems, error -> () in self.save()
-    
-        dismiss(animated: true, completion: nil)
-    }
-    
+    shareController.completionWithItemsHandler = {
+        (activity, completed, items, error) in
+        if completed {
+        self.save()
+        self.dismiss(animated: true, completion: nil)
+
+        }
+        self.dismiss(animated: true, completion: nil)
+        }
             }
     
     func shareEnable() {
