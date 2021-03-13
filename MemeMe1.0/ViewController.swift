@@ -124,7 +124,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    // keyboard Setting
   @objc  func keyboardWiShow(_ notification:Notification) {
     // if statement to only do the movement of keyboard when is the bottom textfield
-    if bottomTextField.isEditing{
+    if bottomTextField.isEditing, view.frame.origin.y == 0  {
         view.frame.origin.y -= getKeyboardHeight(notification)
     }
     
@@ -152,7 +152,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func keyboardWillHide(_ notification:Notification) {
         //return the view to it is orginal point if the view is not at zero
         
-        if  view.frame.origin.y != 0 {
+        if  bottomTextField.isEditing, view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }
         
